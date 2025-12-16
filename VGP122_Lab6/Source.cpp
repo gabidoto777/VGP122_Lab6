@@ -1,16 +1,17 @@
 #pragma once
 
 #include <iostream>
-#include <numeric>      // std::gcd
-#include <stdexcept>    // std::invalid_argument
-#include <iostream>     // optional << >>
+#include <numeric>
+#include <stdexcept>
+#include <iostream>
 
 // T is usually an integer type: int, long long, etc.
 template<typename T = int>
 class Rational
 {
 public:
-    // -------- Constructors --------
+
+    //Constructors
     Rational() : num_(0), den_(1) {}
 
     Rational(T num, T den = 1)
@@ -30,11 +31,11 @@ public:
         den_ = den / g;
     }
 
-    // -------- Getters --------
+    //Getters
     T numerator() const { return num_; }
     T denominator() const { return den_; }
 
-    // -------- Arithmetic operators --------
+    //Arithmetic operators
     Rational operator+(const Rational& rhs) const
     {
         return Rational(
@@ -70,10 +71,9 @@ public:
         );
     }
 
-    // -------- Relational / equality operators --------
+    //Relational/equality operators
     bool operator==(const Rational& rhs) const
     {
-        // Always stored in reduced form, so direct compare works
         return num_ == rhs.num_ && den_ == rhs.den_;
     }
 
@@ -84,7 +84,6 @@ public:
 
     bool operator<(const Rational& rhs) const
     {
-        // a/b < c/d  <=>  a*d < c*b
         return num_ * rhs.den_ < rhs.num_ * den_;
     }
 
@@ -108,7 +107,7 @@ private:
     T den_;
 };
 
-// -------- Optional: stream operators --------
+//Stream operators
 template<typename T>
 std::ostream& operator<<(std::ostream& os, const Rational<T>& r)
 {
@@ -154,3 +153,4 @@ int main()
 
     return 0;
 }
+
